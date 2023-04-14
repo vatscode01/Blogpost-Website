@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));                          // To access CSS Files
 
 
-app.get("/",function(req,res){
+app.get("/home",function(req,res){
   res.render("home",{
     startingContent: homeStartingContent,
     postContent: posts
@@ -43,7 +43,7 @@ app.post("/compose",function(req,res){
     title : req.body.postTitle
   }
   posts.push(post);
-  res.redirect("/");
+  res.redirect("/home");
 });
 
 app.get("/Compose/:postName",function(req,res){
@@ -58,6 +58,10 @@ app.get("/Compose/:postName",function(req,res){
 
   });
 
+});
+
+app.get("/",function(req,res){
+  res.sendFile(__dirname + "/index.html");
 });
 
 app.listen(3000, function() {
